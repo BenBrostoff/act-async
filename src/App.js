@@ -5,10 +5,11 @@ import './App.css';
 export const App = () => {
   const [data, setData] = useState("unloaded value");
   const simulatedFetch = async () => {
-    setData("loading value");
     const fetchedValue = await Promise.resolve('fetched value');
+    const anotherFetchedValue = await Promise.resolve('another');
     await new Promise(res => {
-      setData(fetchedValue);
+      console.log('done!');
+      setData(`${fetchedValue} ${anotherFetchedValue}`);
       res();
     });
   };
