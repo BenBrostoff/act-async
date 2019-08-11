@@ -5,7 +5,7 @@ import App from './App';
 
 let el;
 beforeEach(() => {
-  el = document.createElement("div");  
+  el = document.createElement('div');  
 })
 
 it("should render", async () => {
@@ -15,8 +15,9 @@ it("should render", async () => {
   expect(el.innerHTML).toContain('unloaded value'); 
 
   await act(async () => {
-    // Works as this will just return a promise anyways
-    // await new Promise(res => res());
+    await new Promise(res => {
+      setTimeout(res, 3000);
+    });
   });
 
   expect(el.innerHTML).toContain('fetched value another');

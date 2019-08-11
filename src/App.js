@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
 export const App = () => {
@@ -8,7 +7,9 @@ export const App = () => {
     const fetchedValue = await Promise.resolve('fetched value');
     const anotherFetchedValue = await Promise.resolve('another');
     await new Promise(res => {
-      console.log('done!');
+      setTimeout(res, 3000);
+    });
+    await new Promise(res => {
       setData(`${fetchedValue} ${anotherFetchedValue}`);
       res();
     });
@@ -16,10 +17,16 @@ export const App = () => {
 
   useEffect(() => {
     simulatedFetch();
-  }, [data]);
+  }, []);
   return (
     <div>
-      <h2>{data}</h2>
+      <h2 onClick={async () => {
+        setData('loading');
+        await new Promise(res => {
+          setTimeout(res, 3000);
+        });
+        setData('was clicked');
+      }}>{data}</h2>
     </div>
   );
 };
